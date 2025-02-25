@@ -52,4 +52,22 @@ public class BankLoginTest {
         verificationPage.verify(verificationCode.getCode());
         verificationPage.verifyErrorNotificationVisiblity();
     }
+    @Test
+    void shouldShowErrorNotificationForInvalidPassword() {
+        var loginPage = open("http://localhost:9999", LoginPage.class);
+        var authInfo = DataHelper.getAuthInfoWithInvalidPassword();
+        System.out.println("Trying to log in with invalid password: " + authInfo);
+        loginPage.validLogin(authInfo);
+        loginPage.verifyErrorNotificationVisiblity();
+    }
+
+
+    @Test
+    void shouldShowErrorNotificationForInvalidLogin() {
+        var loginPage = open("http://localhost:9999", LoginPage.class);
+        var authInfo = DataHelper.getAuthInfoWithInvalidLogin();
+        System.out.println("Trying to log in with invalid login: " + authInfo);
+        loginPage.validLogin(authInfo);
+        loginPage.verifyErrorNotificationVisiblity();
+    }
 }

@@ -1,10 +1,12 @@
 package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
+import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPage {
     private final SelenideElement loginField = $("[data-test-id=login] input");
