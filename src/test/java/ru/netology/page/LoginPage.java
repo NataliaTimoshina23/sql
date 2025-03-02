@@ -1,12 +1,10 @@
 package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPage {
     private final SelenideElement loginField = $("[data-test-id=login] input");
@@ -14,8 +12,12 @@ public class LoginPage {
     private final SelenideElement loginButton = $("[data-test-id=action-login]");
     private final SelenideElement errorNotification = $("[data-test-id='error-notification']");
 
-    public void verifyErrorNotificationVisiblity() {
+    public void verifyErrorNotificationVisibility() {
         errorNotification.shouldBe(visible);
+    }
+
+    public String getErrorNotificationText() {
+        return errorNotification.getText();
     }
 
     public VerificationPage validLogin(DataHelper.AuthInfo info) {

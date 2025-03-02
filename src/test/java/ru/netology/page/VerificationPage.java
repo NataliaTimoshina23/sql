@@ -2,6 +2,7 @@ package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -10,17 +11,20 @@ public class VerificationPage {
     private final SelenideElement verifyButton = $("[data-test-id=action-verify]");
     private final SelenideElement errorNotification = $("[data-test-id='error-notification']");
 
-    public void verifyVerificationPageVisiblity() {
+    public void verifyVerificationPageVisibility() {
         codeField.shouldBe(visible);
     }
 
-    public void verifyErrorNotificationVisiblity() {
+    public void verifyErrorNotificationVisibility() {
         errorNotification.shouldBe(visible);
     }
 
     public DashboardPage validVerify(String verificationCode) {
         verify(verificationCode);
         return new DashboardPage();
+    }
+    public String getErrorNotificationText() {
+        return errorNotification.shouldBe(visible).getText();
     }
 
     public void verify(String verificationCode) {
