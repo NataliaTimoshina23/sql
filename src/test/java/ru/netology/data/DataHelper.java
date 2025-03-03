@@ -34,6 +34,9 @@ public class DataHelper {
     public static VerificationCode generateRandomVerificationCode() {
         return new VerificationCode(faker.numerify("######"));
     }
+    public static AuthInfo getInvalidAuthInfo() {
+        return new AuthInfo("invalidLogin", "invalidPassword");
+    }
 
     @Value
     public static class AuthInfo {
