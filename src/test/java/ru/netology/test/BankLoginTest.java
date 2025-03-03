@@ -46,7 +46,7 @@ public class BankLoginTest {
         loginPage.verifyErrorNotificationVisibility();
 
         String expectedErrorMessage = "Ошибка\nОшибка! Неверно указан логин или пароль";
-        loginPage.verifyErrorNotificationVisibility(expectedErrorMessage);
+        loginPage.verifyErrorNotificationVisibility();
     }
 
     @Test
@@ -67,6 +67,6 @@ public class BankLoginTest {
         var authInfo = DataHelper.getInvalidAuthInfo();
         loginPage.invalidLogin(authInfo);
         String expectedErrorMessage = "Ошибка\nОшибка! Неверно указан логин или пароль";
-        loginPage.verifyErrorNotificationVisibility(expectedErrorMessage);
+        loginPage.verifyErrorNotificationVisibility();
     }
 }

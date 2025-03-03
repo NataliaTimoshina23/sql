@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.text;
 
 public class VerificationPage {
     private final SelenideElement codeField = $("[data-test-id=code] input");
@@ -16,14 +17,14 @@ public class VerificationPage {
 
     public void verifyErrorNotificationVisibility(String expectedErrorMessage) {
         errorNotification.shouldBe(visible);
+        if (expectedErrorMessage != null) {
+            errorNotification.shouldHave(text(expectedErrorMessage));
+        }
     }
 
     public DashboardPage validVerify(String verificationCode) {
         verify(verificationCode);
         return new DashboardPage();
-    }
-    public String getErrorNotificationText() {
-        return errorNotification.shouldBe(visible).getText();
     }
 
     public void verify(String verificationCode) {
