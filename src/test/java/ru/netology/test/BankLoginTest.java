@@ -9,7 +9,6 @@ import ru.netology.data.SQLHelper;
 import ru.netology.page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.netology.data.SQLHelper.cleanDatabase;
 import static ru.netology.data.SQLHelper.cleanAuthCodes;
 
@@ -47,8 +46,7 @@ public class BankLoginTest {
         loginPage.verifyErrorNotificationVisibility();
 
         String expectedErrorMessage = "Ошибка\nОшибка! Неверно указан логин или пароль";
-        String actualErrorMessage = loginPage.getErrorNotificationText();
-        assertEquals(expectedErrorMessage, actualErrorMessage, "Сообщение об ошибке не совпадает");
+        loginPage.verifyErrorNotificationVisibility(expectedErrorMessage);
     }
 
     @Test
@@ -57,11 +55,11 @@ public class BankLoginTest {
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.generateRandomVerificationCode();
         verificationPage.verify(verificationCode.getCode());
-        verificationPage.verifyErrorNotificationVisibility();
+        String expectedErrorMessage = null;
+        verificationPage.verifyErrorNotificationVisibility(expectedErrorMessage);
 
-        String expectedErrorMessage = "Ошибка\nОшибка! Неверно указан код! Попробуйте ещё раз.";
-        String actualErrorMessage = verificationPage.getErrorNotificationText();
-        assertEquals(expectedErrorMessage, actualErrorMessage, "Сообщение об ошибке не совпадает");
+        expectedErrorMessage = "Ошибка\nОшибка! Неверно указан код! Попробуйте ещё раз.";
+        verificationPage.verifyErrorNotificationVisibility(expectedErrorMessage);
     }
 
     @Test

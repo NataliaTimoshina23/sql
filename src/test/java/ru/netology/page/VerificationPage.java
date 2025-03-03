@@ -2,7 +2,6 @@ package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -15,7 +14,7 @@ public class VerificationPage {
         codeField.shouldBe(visible);
     }
 
-    public void verifyErrorNotificationVisibility() {
+    public void verifyErrorNotificationVisibility(String expectedErrorMessage) {
         errorNotification.shouldBe(visible);
     }
 
