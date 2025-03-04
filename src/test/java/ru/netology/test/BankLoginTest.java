@@ -40,13 +40,11 @@ public class BankLoginTest {
     }
 
     @Test
-    void shouldErrorNotificationIfLogin() {
+    void shouldShowErrorNotificationIfLoginWithRandomUser() {
         var authInfo = DataHelper.generateRandomUser();
-        loginPage.validLogin(authInfo);
-        loginPage.verifyErrorNotificationVisibility();
-
+        loginPage.invalidLogin(authInfo);
         String expectedErrorMessage = "Ошибка\nОшибка! Неверно указан логин или пароль";
-        loginPage.verifyErrorNotificationVisibility();
+        loginPage.verifyErrorNotificationVisibility(expectedErrorMessage);
     }
 
     @Test
@@ -55,10 +53,9 @@ public class BankLoginTest {
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.generateRandomVerificationCode();
         verificationPage.verify(verificationCode.getCode());
-        String expectedErrorMessage = null;
-        verificationPage.verifyErrorNotificationVisibility(expectedErrorMessage);
 
-        expectedErrorMessage = "Ошибка\nОшибка! Неверно указан код! Попробуйте ещё раз.";
+
+        String expectedErrorMessage = "Ошибка\nОшибка! Неверно указан код! Попробуйте ещё раз.";
         verificationPage.verifyErrorNotificationVisibility(expectedErrorMessage);
     }
 
@@ -66,7 +63,8 @@ public class BankLoginTest {
     void shouldShowErrorNotificationWithCorrectMessage() {
         var authInfo = DataHelper.getInvalidAuthInfo();
         loginPage.invalidLogin(authInfo);
+
         String expectedErrorMessage = "Ошибка\nОшибка! Неверно указан логин или пароль";
-        loginPage.verifyErrorNotificationVisibility();
+        loginPage.verifyErrorNotificationVisibility(expectedErrorMessage);
     }
 }

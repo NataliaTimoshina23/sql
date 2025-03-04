@@ -13,14 +13,6 @@ public class LoginPage {
     private final SelenideElement loginButton = $("[data-test-id=action-login]");
     private final SelenideElement errorNotification = $("[data-test-id='error-notification']");
 
-    public void verifyErrorNotificationVisibility() {
-        errorNotification.shouldBe(visible);
-    }
-
-    public String getErrorNotificationText() {
-        return errorNotification.getText();
-    }
-
     public VerificationPage validLogin(DataHelper.AuthInfo info) {
         loginField.setValue(info.getLogin());
         passwordField.setValue(info.getPassword());
@@ -33,6 +25,7 @@ public class LoginPage {
         passwordField.setValue(info.getPassword());
         loginButton.click();
     }
+
 
     public void verifyErrorNotificationVisibility(String expectedMessage) {
         errorNotification.shouldBe(visible);

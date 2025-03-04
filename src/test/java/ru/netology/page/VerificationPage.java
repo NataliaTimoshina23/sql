@@ -3,8 +3,8 @@ package ru.netology.page;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
 
 public class VerificationPage {
     private final SelenideElement codeField = $("[data-test-id=code] input");
@@ -17,9 +17,7 @@ public class VerificationPage {
 
     public void verifyErrorNotificationVisibility(String expectedErrorMessage) {
         errorNotification.shouldBe(visible);
-        if (expectedErrorMessage != null) {
-            errorNotification.shouldHave(text(expectedErrorMessage));
-        }
+        errorNotification.shouldHave(text(expectedErrorMessage != null ? expectedErrorMessage : ""));
     }
 
     public DashboardPage validVerify(String verificationCode) {
